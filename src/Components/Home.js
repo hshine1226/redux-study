@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
+import ToDo from "./ToDo";
 
 function Home({ toDos, addToDo }) {
   const [text, setText] = useState("");
 
-  useEffect(() => {
-    console.log(text);
-  }, [text]);
+  useEffect(() => {}, [text]);
 
   const onChange = (event) => {
     setText(event.target.value);
@@ -26,7 +25,11 @@ function Home({ toDos, addToDo }) {
         <input type="text" onChange={onChange} value={text} />
         <button>ADD</button>
       </form>
-      <ul>{JSON.stringify(toDos)}</ul>
+      <ul>
+        {toDos.map((toDo) => (
+          <ToDo {...toDo} key={toDo.id} />
+        ))}
+      </ul>
     </>
   );
 }
